@@ -1,0 +1,217 @@
+
+<!doctype html>
+<html>
+<head>
+<title>Alfabet Query</title>
+<meta charset="utf-8" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--script type="text/javascript" src="jquery-1.11.3.min.js"></script-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<style>
+#circle {
+width:200px;
+height:200px;
+background-color:green;
+border-radius:100px;
+}
+.square {
+width:200px;
+height:200px;
+background-color:red;
+margin-top:10px;
+}
+#circle1 {
+width:200px;
+height:200px;
+background-color:green;
+border-radius:100px;
+}
+ 
+</style>
+<script>
+
+alert("Site loading"); 
+
+</script>
+
+<script>
+$(document).ready(function(){
+   $("button").click(function(){
+   $.ajax({
+    url: 'http://localhost:8080/ALFABET98/api/v1/object/',
+    type: 'GET',
+    contentType: 'application/json',
+    Accept:'application/json',
+    headers: {"Authorization": "72GY6SWS5LSUH3OAVDH4HDYQOQRWZPGU"},
+    data: {"refstr": "76-2518-0"},
+    success: function() { alert('Get is completed');
+	}
+	});
+});
+});	
+
+</script>
+
+<script language ="javascript" type "text/javascript"> 
+		var xmlhttp; 
+		
+		function makeCall()
+		{ 
+			xmlhttp = new XMLHttpRequest(); 
+			xmlhttp.onreadystatechange = infoReturned; 
+			xmlhttp.open("GET", "index.html", true); 
+			xmlhttp.send(); 
+		} 
+		
+		function infoReturned()
+		{ 
+			if(xmlhttp.readyState==4 && xmlhttp.status==200) 
+			{
+				console.log(xmlhttp.responseText); 
+			} 
+		} 
+		
+</script>		
+
+</head>
+<body>
+
+
+<h1>Access Alfabet from web app via REST API</h1>
+<h3>This is an example of a GET request</h3>
+
+
+<button>Send an HTTP GET request to alfabet and get the result back</button>
+
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = Date()">
+Click me to display Date and Time.</button>
+
+<p id="demo"></p>
+
+
+<div id="result"></div> 
+<input type="button" value="Call JSON object" onclick="getData()">
+
+<script>
+
+var data; 
+
+function getData() {
+    return $.ajax({
+		url: 'http://localhost:8080/ALFABET98/api/v1/object/',
+		type: 'GET',
+		contentType: 'application/json', // MIME TYPE 
+		Accept:'application/json',
+		//crossDomain: true,
+		dataType: 'json',
+		headers: {"Authorization": "72GY6SWS5LSUH3OAVDH4HDYQOQRWZPGU", 
+		//"AccessMode" : "HttpClient", 
+		//"Access-Control-Allow-Origin": "*"
+		},
+		data: {"refstr": "76-2518-0"},
+        success : handleData
+    })
+}
+
+function handleData(data) {
+	data = JSON.stringify(data); // i noticed that [object.object] was an array that was returned
+    alert(data);
+	console.log(data); 
+	document.getElementById("result").innerHTML = data; 
+    //do some stuff
+}
+
+getData().done(handleData);
+
+$.ajax({
+    url: 'http://localhost:8080/ALFABET98/api/v1/object/',
+    type: 'GET',
+    contentType: 'application/json', // MIME TYPE 
+    Accept:'application/json',
+	//crossDomain: true,
+    dataType: 'json',
+    headers: {"Authorization": "72GY6SWS5LSUH3OAVDH4HDYQOQRWZPGU", 
+	//"AccessMode" : "HttpClient", 
+	//"Access-Control-Allow-Origin": "*"
+	},
+    data: {"refstr": "76-2518-0"},
+    success: function() 
+	{ 
+	alert("Hello yeah. GET successful");
+	alert("Here is the data requested", data); 
+	//makeCall(); 
+	var xmlhttp; 
+	xmlhttp = new XMLHttpRequest(); 
+	xmlhttp.onreadystatechange = infoReturned; 
+	xmlhttp.open("GET", data, true); 
+	xmlhttp.send(); 
+	if(xmlhttp.readyState==4 && xmlhttp.status==200) 
+			{
+				console.log(xmlhttp.responseText); 
+			} 
+	
+	//console.log(data); // Uncaught ReferenceError: data is not defined
+	}, 
+	error: function() {
+	alert("error");  
+  }
+  
+});
+
+
+
+</script>
+
+<script>
+$.ajax({
+    url: 'http://localhost:8080/ALFABET98/api/v1/update/',
+    type: 'POST',
+    contentType: 'application/json', 
+    Accept:'application/json',
+	//crossDomain: true,
+    dataType: 'json',
+    headers: {"Authorization": "T66JADHPYTWW3A7U2ACUFYUZZU7BPCFL", // RW TOKEN 
+	//"AccessMode" : "HttpClient" 
+	//"Access-Control-Allow-Origin": "*"
+	},
+    data: {
+			"_type": "application",
+			"_id": 111,
+			"name": "Franks REST API app 111",
+			"version": "10",
+			"startdate": "2015-04-27",
+			"enddate": "2017-04-27"
+	} ,
+    success: function() { alert("Hello yeah. POST successful");
+	//console.log(data); // Uncaught ReferenceError: data is not defined
+	}, 
+	error: function() {
+	alert("error");  
+  }
+  
+});
+
+
+
+</script>
+
+
+<!--script>
+/*
+alert('hello');
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "http://localhost:8080/ALFABET98/api/v1/object/", true);
+xhr.setRequestHeader("Authorization", "72GY6SWS5LSUH3OAVDH4HDYQOQRWZPGU");
+xhr.onload = function () {
+    console.log(xhr.responseText);
+};
+xhr.send();
+*/ 
+</script-->
+
+</body>
+</html>
+
